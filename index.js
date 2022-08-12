@@ -627,9 +627,6 @@ function animate() {
       ghost.prevCollisions = collisions;
     }
     if (collisions.toString() !== ghost.prevCollisions.toString()) {
-      const pathways = ghost.prevCollisions.filter((collision) => {
-        return !collisions.includes(collision);
-      });
       if (ghost.movement.y < 0) {
         ghost.prevCollisions.push("up");
       } else if (ghost.movement.y > 0) {
@@ -639,6 +636,9 @@ function animate() {
       } else if (ghost.movement.x > 0) {
         ghost.prevCollisions.push("right");
       }
+      const pathways = ghost.prevCollisions.filter((collision) => {
+        return !collisions.includes(collision);
+      });
       const direction = pathways[Math.floor(Math.random() * pathways.length)];
       switch (direction) {
         case "up":
